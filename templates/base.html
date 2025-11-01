@@ -1,24 +1,32 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <title>GabiMinecraft02 Website</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>GabiMinecraft02 Website</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <div class="brand">
+        <h1>GabiMinecraft02</h1>
+        <p class="tagline">Welcome to the GabiMinecraft02 website!<br>Go to my backups, servers, YouTube, Discord, Snapchat, TikTok and my modding website.</p>
+      </div>
+      <div class="header-actions">
+        <a class="btn btn-admin" href="{{ url_for('set_credentials') }}">Administrator Login</a>
+      </div>
+    </div>
+  </header>
 
-<header>
-    <h1>Welcome to the GabiMinecraft02 Website!</h1>
-    <p>Go to my backup servers, YouTube, Discord, Snapchat, TikTok and my website!</p>
-</header>
-
-<main>
+  <main class="container">
     {% block content %}{% endblock %}
-</main>
+  </main>
 
-<footer>
-    <p>© 2025 GabiMinecraft02 | All rights reserved</p>
-</footer>
-
+  <footer class="site-footer">
+    <div class="container">
+      <small>© {{ current_year if current_year is defined else "2025" }} GabiMinecraft02 — All rights reserved</small>
+    </div>
+  </footer>
 </body>
 </html>

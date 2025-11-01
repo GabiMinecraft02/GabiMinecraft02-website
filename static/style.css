@@ -1,81 +1,110 @@
-body {
-    background: #1e1e2e;
-    color: white;
-    font-family: 'Segoe UI', sans-serif;
-    text-align: center;
-    margin: 0;
+:root{
+  --bg:#07070b;
+  --card:#0f1220;
+  --muted:#9aa7c7;
+  --accent:#1f8fff;
+  --accent-2:#7cc3ff;
+  --text:#e9eef8;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  background:linear-gradient(180deg,#05050a 0%, #0b0b12 100%);
+  color:var(--text);
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+}
+.container{max-width:1100px;margin:0 auto;padding:28px}
+
+/* header */
+.site-header{border-bottom:1px solid rgba(255,255,255,0.03);padding:18px 0}
+.header-inner{display:flex;align-items:flex-start;justify-content:space-between;gap:20px}
+.brand h1{margin:0;font-size:22px}
+.tagline{margin:6px 0 0;color:var(--muted);font-size:13px}
+
+/* admin button top right */
+.header-actions .btn-admin{
+  display:inline-block;padding:8px 12px;border-radius:8px;background:transparent;border:1px solid rgba(255,255,255,0.06);
+  color:var(--accent-2);text-decoration:none;font-weight:600;
+}
+.header-actions .btn-admin:hover{background:rgba(31,143,255,0.08)}
+
+/* layout */
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px;margin-top:22px}
+.card{background:var(--card);padding:18px;border-radius:12px;box-shadow:0 6px 18px rgba(2,6,23,0.6);border:1px solid rgba(255,255,255,0.02)}
+.card h2{margin:0 0 6px;font-size:18px}
+.card .muted{color:var(--muted);margin-bottom:12px;font-size:13px}
+
+/* buttons */
+.actions{display:flex;flex-wrap:wrap;gap:10px}
+.btn{
+  display:inline-block;padding:10px 14px;border-radius:8px;background:linear-gradient(180deg,var(--accent),#0b78d9);
+  color:white;text-decoration:none;font-weight:600;border:none;cursor:pointer;
+  box-shadow:0 6px 18px rgba(31,143,255,0.12);
+}
+.btn:hover{transform:translateY(-2px)}
+.btn:active{transform:translateY(0)}
+
+.btn.disabled, .btn[aria-disabled="true"], button[disabled]{
+  background:transparent;border:1px dashed rgba(255,255,255,0.04);color:var(--muted);cursor:not-allowed;box-shadow:none;
+}
+
+/* backups list */
+.backup-list{list-style:none;padding:12px 0 0;margin:0;display:flex;flex-direction:column;gap:8px}
+
+/* footer */
+.site-footer{border-top:1px solid rgba(255,255,255,0.03);padding:18px 0;margin-top:28px;text-align:center;color:var(--muted)}
+}
+
+/* Menus horizontaux */
+nav ul {
+    list-style: none;
     padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center; /* Centrer horizontalement */
+    background-color: #333; /* Couleur de fond du menu */
 }
 
-header {
-    background: #27293d;
-    padding: 30px 10px;
+nav ul li {
+    position: relative;
+    margin: 0 15px;
 }
 
-h1 {
-    color: #00bfff;
-    margin-bottom: 10px;
-}
-
-main {
-    padding: 20px;
-}
-
-section {
-    background: #2c2f48;
-    margin: 20px auto;
-    padding: 20px;
-    border-radius: 10px;
-    width: 80%;
-    max-width: 600px;
-}
-
-.btn {
-    display: inline-block;
-    background: #00bfff;
+nav ul li a {
+    display: block;
     color: white;
     text-decoration: none;
-    padding: 10px 20px;
-    border-radius: 8px;
-    margin: 5px;
-    transition: 0.2s;
+    padding: 10px 15px;
 }
-.btn:hover {
-    background: #0096c7;
+
+nav ul li:hover > ul {
+    display: block; /* Afficher le sous-menu au survol */
+}
+
+nav ul ul {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #444;
+    padding: 0;
+    list-style: none;
+    min-width: 180px;
+}
+
+nav ul ul li {
+    margin: 0;
+}
+
+nav ul ul li a {
+    padding: 10px;
 }
 
 .disabled {
-    opacity: 0.5;
+    color: #888;
+    padding: 10px;
+    display: block;
+    cursor: not-allowed;
 }
-
-footer {
-    background: #151623;
-    padding: 15px;
-    font-size: 14px;
-}
-.gallery {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 10px;
-    margin-top: 10px;
-}
-
-.gallery img {
-    width: 250px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.4);
-    transition: transform 0.2s ease;
-}
-
-.gallery img:hover {
-    transform: scale(1.05);
-}
-
-.text-list p {
-    background: #3a3c59;
-    border-radius: 5px;
-    padding: 8px;
-    margin: 5px;
-}
-

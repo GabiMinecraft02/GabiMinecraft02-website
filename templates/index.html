@@ -1,27 +1,61 @@
 {% extends "base.html" %}
+
 {% block content %}
+<div class="grid">
 
-<section>
-    <h2>🌐 Website</h2>
-    <a href="https://minecraft-ps3-moding-website.onrender.com/" class="btn">Minecraft Modding Website</a>
-</section>
+  <!-- CATEGORY: Website -->
+  <section class="card">
+    <h2>Website</h2>
+    <p class="muted">Sites & projects</p>
+    <div class="actions">
+      <a class="btn" href="https://minecraft-ps3-moding-website.onrender.com/" target="_blank" rel="noopener">Minecraft modding website</a>
+    </div>
+  </section>
 
-<section>
-    <h2>🖥️ Servers</h2>
-    <a href="https://discord.gg/ex8Jgrm255" class="btn">PS3 Backup Discord</a>
-    <a href="https://discord.gg/dZUEhNZWWD" class="btn">YouTube Server</a>
-    <a href="https://snapchat.com/t/NuFx4joB" class="btn">Snapchat Chat</a>
-</section>
+  <!-- CATEGORY: Servers -->
+  <section class="card">
+    <h2>Servers</h2>
+    <p class="muted">Community & backup servers</p>
+    <div class="actions">
+      <a class="btn" href="https://discord.gg/ex8Jgrm255" target="_blank" rel="noopener">PS3 Backup Discord</a>
+      <a class="btn" href="https://discord.gg/dZUEhNZWWD" target="_blank" rel="noopener">YouTube server</a>
+      <a class="btn" href="https://snapchat.com/t/NuFx4joB" target="_blank" rel="noopener">Snapchat chat</a>
+    </div>
+  </section>
 
-<section>
-    <h2>🎥 YouTube & TikTok</h2>
-    <a href="https://www.youtube.com/@GabiMinecraft02ps3" class="btn">YouTube</a>
-    <a href="https://www.tiktok.com/@gabiminecraft028?is_from_webapp=1&sender_device=pc" class="btn">TikTok</a>
-</section>
+  <!-- CATEGORY: YouTube & TikTok -->
+  <section class="card">
+    <h2>YouTube & TikTok</h2>
+    <p class="muted">Suivez-moi</p>
+    <div class="actions">
+      <a class="btn" href="https://www.youtube.com/@GabiMinecraft02ps3" target="_blank" rel="noopener">YouTube</a>
+      <a class="btn" href="https://www.tiktok.com/@gabiminecraft028?is_from_webapp=1&sender_device=pc" target="_blank" rel="noopener">TikTok</a>
+    </div>
+  </section>
 
-<section>
-    <h2>💾 Backups</h2>
-    <a href="{{ url_for('backup') }}" class="btn">Wanters V1</a>
-</section>
+  <!-- CATEGORY: Backups -->
+  <section class="card">
+    <h2>Backups</h2>
+    <p class="muted">Old projects & downloads</p>
 
+    <div class="actions">
+      <!-- Wanters V1 opens advancements page on the same site -->
+      <a class="btn" href="{{ url_for('advancements') }}">Wanters V1</a>
+    </div>
+
+    <ul class="backup-list">
+      <li>
+        <a class="btn disabled" href="#" aria-disabled="true">Advancement (coming soon)</a>
+      </li>
+      <li>
+        <button class="btn muted disabled" disabled>Download archive (coming soon)</button>
+      </li>
+      <li>
+        <button class="btn muted disabled" disabled>Download PKG (coming soon)</button>
+      </li>
+    </ul>
+
+  </section>
+
+</div>
 {% endblock %}

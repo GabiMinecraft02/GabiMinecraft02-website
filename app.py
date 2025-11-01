@@ -412,4 +412,8 @@ def attempts_left():
 # Run
 # ----------------------------
 if __name__ == "__main__":
-    app.run(host=HOST, port=PORT, debug=True)
+    # Affiche toutes les routes disponibles pour debugging
+    print("=== Liste des routes Flask ===")
+    for rule in app.url_map.iter_rules():
+        print(f"{rule.endpoint}: {rule}")
+    app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 10000)))
