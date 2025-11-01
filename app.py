@@ -18,66 +18,41 @@ HOST = "0.0.0.0"
 # ----------------------------
 app = Flask(__name__)
 app.secret_key = os.environ.get("FLASK_SECRET", "change_this_secret_in_env")
-MASTER_KEY = os.environ.get("MASTER_KEY", "change_this_master_key")
 
 # ----------------------------
-# Paths and settings
+# Auth JSON path
 # ----------------------------
-UPLOAD_FOLDER = "uploads"
-TEXT_FOLDER = "texts"
-AUTH_FILE = "auth.json"
-ALLOWED_EXTENSIONS = {"png", "jpg", "jpeg", "gif"}
-MAX_LOGIN_ATTEMPTS = 4
-LOGIN_RESET_HOURS = 24
-
-os.makedirs(UPLOAD_FOLDER, exist_ok=True)
-os.makedirs(TEXT_FOLDER, exist_ok=True)
-if not os.path.exists(AUTH_FILE):
-    with open(AUTH_FILE, "w") as f:
-        json.dump({}, f)
+AUTH_FILE = os.path.join(os.path.dirname(__file__), "auth.json")
 
 # ----------------------------
-# Helper functions
+# Load auth data
 # ----------------------------
 def load_auth():
     with open(AUTH_FILE, "r") as f:
         return json.load(f)
 
-def save_auth(auth_data):
+def save_auth(data):
     with open(AUTH_FILE, "w") as f:
-        json.dump(auth_data, f, indent=4)
+        json.dump(data, f, indent=2)
 
-def allowed_file(filename):
-    return "." in filename and filename.rsplit(".", 1)[1].lower() in ALLOWED_EXTENSIONS
-
-def limit_login_attempts(user):
-    auth_data = load_auth()
-    info = auth_data.get(user, {})
-    attempts = info.get("attempts", 0)
-    last_try = info.get("last_try", 0)
-    now = time.time()
-    if now - last_try > LOGIN_RESET_HOURS * 3600:
-        attempts = 0
-    if attempts >= MAX_LOGIN_ATTEMPTS:
-        return False
-    info["attempts"] = attempts + 1
-    info["last_try"] = now
-    auth_data[user] = info
-    save_auth(auth_data)
-    return True
-
-def check_password(user, password):
-    auth_data = load_auth()
-    if user not in auth_data:
-        return False
-    return check_password_hash(auth_data[user]["password"], password)
-
-def admin_required(f):
+# ----------------------------
+# Auth decorators
+# ----------------------------
+def master_key_required(f):
     @wraps(f)
     def decorated(*args, **kwargs):
-        if "admin_logged_in" not in session:
-            flash("Admin login required")
-            return redirect(url_for("admin_login"))
+        key = request.args.get("master_key")
+        auth = load_auth()
+        if key != auth.get("master_key"):
+            return "Forbidden\nMASTER_KEY required", 403
+        return f(*args, **kwargs)
+    return decorated
+
+def login_required(f):
+    @wraps(f)
+    def decorated(*args, **kwargs):
+        if not session.get("admin_logged_in"):
+            return redirect(url_for("index"))
         return f(*args, **kwargs)
     return decorated
 
@@ -88,91 +63,61 @@ def admin_required(f):
 def index():
     return render_template("index.html")
 
-# ----------------------------
-# Advancements page (uploads)
-# ----------------------------
-@app.route("/advancements", methods=["GET", "POST"])
+@app.route("/advancements")
+@login_required
 def advancements():
-    auth_data = load_auth()
-    admin_pass = auth_data.get("admin", {}).get("password", None)
-    if request.method == "POST":
-        if session.get("admin_logged_in"):
-            # Upload image
-            if "image" in request.files:
-                file = request.files["image"]
-                if file.filename and allowed_file(file.filename):
-                    filename = secure_filename(file.filename)
-                    file.save(os.path.join(UPLOAD_FOLDER, filename))
-                    flash("Image uploaded successfully")
-            # Upload text
-            text_content = request.form.get("text")
-            if text_content:
-                timestamp = int(time.time())
-                text_file = os.path.join(TEXT_FOLDER, f"{timestamp}.txt")
-                with open(text_file, "w", encoding="utf-8") as f:
-                    f.write(text_content)
-                flash("Text uploaded successfully")
-        else:
-            flash("You must be admin to upload")
-            return redirect(url_for("admin_login"))
-    images = os.listdir(UPLOAD_FOLDER)
-    texts = os.listdir(TEXT_FOLDER)
+    # Liste des images/textes dans le dossier
+    images_dir = os.path.join("static", "advancements", "images")
+    texts_dir = os.path.join("static", "advancements", "texts")
+
+    images = os.listdir(images_dir) if os.path.exists(images_dir) else []
+    texts = os.listdir(texts_dir) if os.path.exists(texts_dir) else []
+
     return render_template("advancements.html", images=images, texts=texts)
 
-# ----------------------------
-# Admin login
-# ----------------------------
 @app.route("/admin", methods=["GET", "POST"])
 def admin_login():
     if request.method == "POST":
-        user = request.form.get("login_id")
+        login_id = request.form.get("login_id")
         password = request.form.get("password")
-        if not limit_login_attempts(user):
-            flash("Maximum login attempts reached, try again later")
-            return redirect(url_for("admin_login"))
-        if check_password(user, password):
+        auth = load_auth()
+        admin = next((a for a in auth.get("admins", []) if a["login_id"] == login_id), None)
+        if admin and check_password_hash(admin["password_hash"], password):
             session["admin_logged_in"] = True
-            flash("Logged in as admin")
-            return redirect(url_for("advancements"))
+            flash("Admin logged in successfully", "success")
+            return redirect(url_for("index"))
         else:
-            flash("Invalid login or password")
+            flash("Invalid login or password", "danger")
     return render_template("admin_login.html")
 
 # ----------------------------
-# Admin logout
+# Upload for advancements
 # ----------------------------
-@app.route("/admin_logout")
-def admin_logout():
-    session.pop("admin_logged_in", None)
-    flash("Logged out")
-    return redirect(url_for("index"))
+UPLOAD_FOLDER = os.path.join("static", "advancements")
+os.makedirs(os.path.join(UPLOAD_FOLDER, "images"), exist_ok=True)
+os.makedirs(os.path.join(UPLOAD_FOLDER, "texts"), exist_ok=True)
+
+@app.route("/advancements/upload", methods=["GET", "POST"])
+@login_required
+def upload_advancement():
+    if request.method == "POST":
+        if "image" in request.files:
+            image = request.files["image"]
+            if image.filename != "":
+                filename = secure_filename(image.filename)
+                image.save(os.path.join(UPLOAD_FOLDER, "images", filename))
+        if "text" in request.form:
+            text = request.form["text"]
+            if text.strip():
+                filename = f"{int(time.time())}.txt"
+                with open(os.path.join(UPLOAD_FOLDER, "texts", filename), "w", encoding="utf-8") as f:
+                    f.write(text)
+        flash("Uploaded successfully!", "success")
+        return redirect(url_for("advancements"))
+    return render_template("upload.html")
 
 # ----------------------------
-# Set credentials (master key required)
-# ----------------------------
-@app.route("/set_credentials", methods=["POST"])
-def set_credentials():
-    key = request.args.get("master_key")
-    if key != MASTER_KEY:
-        abort(403, "MASTER_KEY required")
-    login_id = request.form.get("login_id")
-    password = request.form.get("password")
-    if not login_id or not password:
-        abort(400, "login_id and password required")
-    auth_data = load_auth()
-    auth_data[login_id] = {"password": generate_password_hash(password), "attempts": 0, "last_try": 0}
-    save_auth(auth_data)
-    return jsonify({"status": "success", "login_id": login_id})
-
-# ----------------------------
-# Static files for uploads
-# ----------------------------
-@app.route("/uploads/<filename>")
-def uploaded_file(filename):
-    return send_from_directory(UPLOAD_FOLDER, filename)
-
-# ----------------------------
-# Run app
+# Run Flask
 # ----------------------------
 if __name__ == "__main__":
     app.run(host=HOST, port=PORT, debug=True)
