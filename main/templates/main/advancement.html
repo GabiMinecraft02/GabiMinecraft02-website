@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>{{ folder }} Advancements</title>
+<link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<h1>{{ folder }}</h1>
+
+{% for text in texts %}
+    <p>{{ text }}</p>
+{% endfor %}
+
+{% for img in images %}
+    <img src="/tools/advancements/{{ folder }}/{{ img }}" alt="{{ img }}" style="max-width:300px;">
+{% endfor %}
+
+<a href="{% url 'index' %}">Retour</a>
+</body>
+</html>

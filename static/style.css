@@ -1,110 +1,105 @@
-:root{
-  --bg:#07070b;
-  --card:#0f1220;
-  --muted:#9aa7c7;
-  --accent:#1f8fff;
-  --accent-2:#7cc3ff;
-  --text:#e9eef8;
-}
-*{box-sizing:border-box}
-body{
-  margin:0;
-  font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-  background:linear-gradient(180deg,#05050a 0%, #0b0b12 100%);
-  color:var(--text);
-  -webkit-font-smoothing:antialiased;
-  -moz-osx-font-smoothing:grayscale;
-}
-.container{max-width:1100px;margin:0 auto;padding:28px}
-
-/* header */
-.site-header{border-bottom:1px solid rgba(255,255,255,0.03);padding:18px 0}
-.header-inner{display:flex;align-items:flex-start;justify-content:space-between;gap:20px}
-.brand h1{margin:0;font-size:22px}
-.tagline{margin:6px 0 0;color:var(--muted);font-size:13px}
-
-/* admin button top right */
-.header-actions .btn-admin{
-  display:inline-block;padding:8px 12px;border-radius:8px;background:transparent;border:1px solid rgba(255,255,255,0.06);
-  color:var(--accent-2);text-decoration:none;font-weight:600;
-}
-.header-actions .btn-admin:hover{background:rgba(31,143,255,0.08)}
-
-/* layout */
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px;margin-top:22px}
-.card{background:var(--card);padding:18px;border-radius:12px;box-shadow:0 6px 18px rgba(2,6,23,0.6);border:1px solid rgba(255,255,255,0.02)}
-.card h2{margin:0 0 6px;font-size:18px}
-.card .muted{color:var(--muted);margin-bottom:12px;font-size:13px}
-
-/* buttons */
-.actions{display:flex;flex-wrap:wrap;gap:10px}
-.btn{
-  display:inline-block;padding:10px 14px;border-radius:8px;background:linear-gradient(180deg,var(--accent),#0b78d9);
-  color:white;text-decoration:none;font-weight:600;border:none;cursor:pointer;
-  box-shadow:0 6px 18px rgba(31,143,255,0.12);
-}
-.btn:hover{transform:translateY(-2px)}
-.btn:active{transform:translateY(0)}
-
-.btn.disabled, .btn[aria-disabled="true"], button[disabled]{
-  background:transparent;border:1px dashed rgba(255,255,255,0.04);color:var(--muted);cursor:not-allowed;box-shadow:none;
-}
-
-/* backups list */
-.backup-list{list-style:none;padding:12px 0 0;margin:0;display:flex;flex-direction:column;gap:8px}
-
-/* footer */
-.site-footer{border-top:1px solid rgba(255,255,255,0.03);padding:18px 0;margin-top:28px;text-align:center;color:var(--muted)}
-}
-
-/* Menus horizontaux */
-nav ul {
-    list-style: none;
-    padding: 0;
+/* Base */
+body {
+    background-image: url('/static/Minecraft_background.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    color: #ffffff;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 0;
-    display: flex;
-    justify-content: center; /* Centrer horizontalement */
-    background-color: #333; /* Couleur de fond du menu */
+    padding: 0;
+    text-shadow: 1px 1px 2px #000; /* améliore la lisibilité sur le fond */
 }
 
-nav ul li {
-    position: relative;
-    margin: 0 15px;
+/* Header */
+header {
+    background: linear-gradient(90deg, #ff416c, #ff4b2b);
+    padding: 25px;
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #fff;
+    letter-spacing: 1px;
+    text-shadow: 2px 2px 4px #000;
 }
 
-nav ul li a {
-    display: block;
+/* Menu container */
+.menu {
+    width: 350px;
+    margin: 30px auto;
+    padding: 10px;
+    background: rgba(0,0,0,0.5); /* léger fond sombre pour faire ressortir les boutons */
+    border-radius: 12px;
+}
+
+/* Categories */
+.category {
+    margin-bottom: 25px;
+}
+
+.category-title {
+    font-weight: bold;
+    font-size: 1.3rem;
+    margin-bottom: 10px;
+    color: #ffcc00;
+    text-shadow: 2px 2px 4px #000;
+}
+
+/* Buttons */
+.category button {
+    background: linear-gradient(90deg, #ff7e5f, #feb47b);
     color: white;
-    text-decoration: none;
-    padding: 10px 15px;
+    border: none;
+    border-radius: 12px;
+    padding: 14px 22px;
+    margin-bottom: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    text-align: left;
+    width: 100%;
+    transition: all 0.25s ease;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.3);
 }
 
-nav ul li:hover > ul {
-    display: block; /* Afficher le sous-menu au survol */
+.category button:hover {
+    background: linear-gradient(90deg, #6a11cb, #2575fc);
+    transform: scale(1.05);
+    box-shadow: 0 6px 15px rgba(0,0,0,0.5);
 }
 
-nav ul ul {
+/* Submenu */
+.submenu {
     display: none;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    background-color: #444;
-    padding: 0;
-    list-style: none;
-    min-width: 180px;
+    flex-direction: column;
+    margin-left: 15px;
 }
 
-nav ul ul li {
-    margin: 0;
+.submenu button {
+    background: linear-gradient(90deg, #43cea2, #185a9d);
+    font-size: 0.95rem;
 }
 
-nav ul ul li a {
-    padding: 10px;
+.submenu button:hover {
+    background: linear-gradient(90deg, #f7971e, #ffd200);
 }
 
-.disabled {
-    color: #888;
-    padding: 10px;
-    display: block;
+/* Disabled buttons */
+button[disabled] {
+    background: #555;
+    color: #ccc;
     cursor: not-allowed;
+    opacity: 0.7;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 15px;
+    background: linear-gradient(90deg, #ff416c, #ff4b2b);
+    margin-top: 50px;
+    font-size: 0.95rem;
+    color: #fff;
+    letter-spacing: 0.5px;
+    text-shadow: 1px 1px 2px #000;
 }

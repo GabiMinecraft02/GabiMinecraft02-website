@@ -1,23 +1,18 @@
 @echo off
-title Lancement du site Flask - GabiMinecraft02
-echo ===========================================
-echo   🚀 Lancement du site Flask localement
-echo ===========================================
+title Lancement du site GabiMinecraft02
+echo ==========================================
+echo      🚀 Lancement du serveur Django
+echo ==========================================
+echo.
 
-:: Aller dans le dossier du projet
-cd /d "C:\Users\gabri\Desktop\projets\GabiMinecraft02 website"
+REM Aller dans le dossier du projet
+cd /d "%~dp0"
 
-:: Active l'environnement virtuel si présent
-if exist "venv\Scripts\activate.bat" (
-    call venv\Scripts\activate
-)
+REM Activer l'environnement virtuel
+call venv\Scripts\activate.bat
 
-:: Lancer Flask
-python app.py
+REM Lancer le serveur Django
+python manage.py runserver 5000
 
-:: Si Flask plante, garder la fenêtre ouverte
-if %errorlevel% neq 0 (
-    echo ⚠️ Le serveur Flask s'est arrêté avec une erreur.
-)
-
+REM Garder la fenêtre ouverte
 pause
