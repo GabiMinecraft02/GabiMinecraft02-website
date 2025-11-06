@@ -52,34 +52,44 @@
 
     <!-- Backups Category -->
     <div class="category">
-        <div class="category-title">Backups</div>
-        <button onclick="toggleSubmenu('backups-sub')">Show Backups</button>
+        <div class="category-title">My Backups</div>
+        <button onclick="toggleSubmenu('backups-sub')">WantersV1</button>
         <div class="submenu" id="backups-sub">
-            <button onclick="window.open('/tools/advancements/WantersV1', '_blank')">Wanters V1</button>
+            <button onclick="window.open('/tools/advancements/WantersV1', '_blank')">advancements</button>
             <!-- Ajout futur: archive et pkg grisés -->
             <button disabled>Download Archive (Coming Soon)</button>
             <button disabled>Download PKG (Coming Soon)</button>
         </div>
     </div>
 
-    <!-- Friends Backup Category -->
-    <div class="category">
-        <div class="category-title">Friends Backups</div>
-        <button onclick="toggleSubmenu('friends-sub')">Show Friends Backups</button>
-        <div class="submenu" id="friends-sub">
-            <button onclick="window.open('/tools/advancements/BakaV1', '_blank')">Baka V1</button>
-            <button disabled>Download Archive (Coming Soon)</button>
-            <button disabled>Download PKG (Coming Soon)</button>
+<!-- Friends Backup Category -->
+<div class="category">
+    <div class="category-title">Friends Backups</div>
 
-            <button onclick="window.open('/tools/advancements/BakaV2', '_blank')">Baka V2</button>
-            <button disabled>Download Archive (Coming Soon)</button>
-            <button disabled>Download PKG (Coming Soon)</button>
-
-            <button onclick="window.open('/tools/advancements/LasV1', '_blank')">Las V1</button>
-            <button disabled>Download Archive (Coming Soon)</button>
-            <button disabled>Download PKG (Coming Soon)</button>
-        </div>
+    <!-- BakaV1 -->
+    <button onclick="toggleSubmenu('baka1-sub')">BakaV1</button>
+    <div class="submenu" id="baka1-sub">
+        <button onclick="window.open('/tools/advancements/BakaV1', '_blank')">advancements</button>
+        <button disabled>Download Archive (Coming Soon)</button>
+        <button disabled>Download PKG (Coming Soon)</button>
     </div>
+
+    <!-- BakaV2 -->
+    <button onclick="toggleSubmenu('baka2-sub')">BakaV2</button>
+    <div class="submenu" id="baka2-sub">
+        <button onclick="window.open('/tools/advancements/BakaV2', '_blank')">advancements</button>
+        <button disabled>Download Archive (Coming Soon)</button>
+        <button disabled>Download PKG (Coming Soon)</button>
+    </div>
+
+    <!-- LasV1 -->
+    <button onclick="toggleSubmenu('las1-sub')">LasV1</button>
+    <div class="submenu" id="las1-sub">
+        <button onclick="window.open('/tools/advancements/LasV1', '_blank')">advancements</button>
+        <button disabled>Download Archive (Coming Soon)</button>
+        <button disabled>Download PKG (Coming Soon)</button>
+    </div>
+</div>
 
     <!-- Informations supplémentaires / footer mini menu -->
     <div class="category">
