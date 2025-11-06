@@ -5,29 +5,136 @@
     <meta charset="UTF-8">
     <title>GabiMinecraft02 Website</title>
     <link rel="stylesheet" href="{% static 'style.css' %}">
+    <style>
+        /* --- Style minimal pour test rapide (tu peux déplacer dans style.css) --- */
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(180deg, #101010, #1a1a1a);
+            color: white;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        header {
+            text-align: center;
+            padding: 2rem;
+            background: #181818;
+            font-size: 1.3rem;
+            border-bottom: 2px solid #333;
+        }
+
+        .menu {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2rem;
+            padding: 2rem;
+        }
+
+        .category {
+            background: #222;
+            border-radius: 1rem;
+            padding: 1rem;
+            width: 280px;
+            text-align: center;
+            box-shadow: 0 0 10px rgba(0,0,0,0.5);
+            transition: 0.3s;
+        }
+
+        .category:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 0 15px rgba(255,255,255,0.1);
+        }
+
+        .category-title {
+            font-weight: bold;
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            border-bottom: 1px solid #444;
+            padding-bottom: 0.5rem;
+            color: #4fd1c5;
+        }
+
+        button {
+            background: #333;
+            color: white;
+            border: none;
+            padding: 0.6rem 1rem;
+            margin: 0.3rem 0;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            width: 90%;
+            transition: 0.3s;
+        }
+
+        button:hover:not(:disabled) {
+            background: #4fd1c5;
+            color: #000;
+        }
+
+        button:disabled {
+            background: #555;
+            color: #aaa;
+            cursor: not-allowed;
+        }
+
+        .submenu {
+            display: none;
+            flex-direction: column;
+            margin-top: 0.5rem;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .submenu.show {
+            display: flex;
+        }
+
+        @keyframes fadeIn {
+            from {opacity: 0;}
+            to {opacity: 1;}
+        }
+
+        footer {
+            text-align: center;
+            padding: 1rem;
+            margin-top: auto;
+            background: #181818;
+            border-top: 2px solid #333;
+            color: #aaa;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            .menu {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+
     <script>
-        // Fonction pour afficher/masquer les sous-menus
         function toggleSubmenu(id) {
             const menu = document.getElementById(id);
-            if (menu.style.display === 'flex') {
-                menu.style.display = 'none';
-            } else {
-                menu.style.display = 'flex';
-            }
+            menu.classList.toggle('show');
         }
     </script>
 </head>
 <body>
+
 <!-- Header -->
 <header>
-    Welcome to the GabiMinecraft02 Website!<br>
-    Go to my backups, servers, YouTube, Discord, Snapchat, TikTok, and my Minecraft Modding Website
+    <strong>Welcome to the GabiMinecraft02 Website!</strong><br>
+    Go to my backups, servers, YouTube, Discord, Snapchat, TikTok, and my Minecraft Modding Website.
 </header>
 
 <!-- Menu principal -->
 <div class="menu">
 
-    <!-- Website Category -->
+    <!-- Website -->
     <div class="category">
         <div class="category-title">Website</div>
         <button onclick="window.open('https://minecraft-ps3-moding-website.onrender.com/', '_blank')">
@@ -35,7 +142,7 @@
         </button>
     </div>
 
-    <!-- Servers Category -->
+    <!-- Servers -->
     <div class="category">
         <div class="category-title">Servers</div>
         <button onclick="window.open('https://discord.gg/ex8Jgrm255', '_blank')">PS3 Backup Discord</button>
@@ -43,63 +150,56 @@
         <button onclick="window.open('https://snapchat.com/t/NuFx4joB', '_blank')">Snapchat Chat</button>
     </div>
 
-    <!-- YouTube & TikTok Category -->
+    <!-- YouTube & TikTok -->
     <div class="category">
         <div class="category-title">YouTube & TikTok</div>
         <button onclick="window.open('https://www.youtube.com/@GabiMinecraft02ps3', '_blank')">YouTube</button>
         <button onclick="window.open('https://www.tiktok.com/@gabiminecraft028?is_from_webapp=1&sender_device=pc', '_blank')">TikTok</button>
     </div>
 
-    <!-- Backups Category -->
+    <!-- My Backups -->
     <div class="category">
         <div class="category-title">My Backups</div>
-
-        <!-- WantersV1 -->
-        <button onclick="toggleSubmenu('backups-sub')">WantersV1</button>
-        <div class="submenu" id="backups-sub">
-            <button onclick="window.open('/advancements/WantersV1', '_blank')">advancements</button>
+        <button onclick="toggleSubmenu('wantersV1')">WantersV1</button>
+        <div class="submenu" id="wantersV1">
+            <button onclick="window.open('/advancements/WantersV1', '_blank')">Advancements</button>
             <button disabled>Download Archive (Coming Soon)</button>
             <button disabled>Download PKG (Coming Soon)</button>
         </div>
     </div>
 
-    <!-- Friends Backup Category -->
+    <!-- Friends Backups -->
     <div class="category">
         <div class="category-title">Friends Backups</div>
-
-        <!-- BakaV1 -->
-        <button onclick="toggleSubmenu('baka1-sub')">BakaV1</button>
-        <div class="submenu" id="baka1-sub">
-            <button onclick="window.open('/advancements/BakaV1', '_blank')">advancements</button>
+        <button onclick="toggleSubmenu('bakaV1')">BakaV1</button>
+        <div class="submenu" id="bakaV1">
+            <button onclick="window.open('/advancements/BakaV1', '_blank')">Advancements</button>
             <button disabled>Download Archive (Coming Soon)</button>
             <button disabled>Download PKG (Coming Soon)</button>
         </div>
 
-        <!-- BakaV2 -->
-        <button onclick="toggleSubmenu('baka2-sub')">BakaV2</button>
-        <div class="submenu" id="baka2-sub">
-            <button onclick="window.open('/advancements/BakaV2', '_blank')">advancements</button>
+        <button onclick="toggleSubmenu('bakaV2')">BakaV2</button>
+        <div class="submenu" id="bakaV2">
+            <button onclick="window.open('/advancements/BakaV2', '_blank')">Advancements</button>
             <button disabled>Download Archive (Coming Soon)</button>
             <button disabled>Download PKG (Coming Soon)</button>
         </div>
 
-        <!-- LasV1 -->
-        <button onclick="toggleSubmenu('las1-sub')">LasV1</button>
-        <div class="submenu" id="las1-sub">
-            <button onclick="window.open('/advancements/LasV1', '_blank')">advancements</button>
+        <button onclick="toggleSubmenu('lasV1')">LasV1</button>
+        <div class="submenu" id="lasV1">
+            <button onclick="window.open('/advancements/LasV1', '_blank')">Advancements</button>
             <button disabled>Download Archive (Coming Soon)</button>
             <button disabled>Download PKG (Coming Soon)</button>
         </div>
     </div>
 
-    <!-- Follow Me Category -->
+    <!-- Follow Me -->
     <div class="category">
         <div class="category-title">Follow Me</div>
         <button onclick="window.open('https://www.youtube.com/@GabiMinecraft02ps3', '_blank')">YouTube Channel</button>
-        <button onclick="window.open('https://www.tiktok.com/@gabiminecraft028?is_from_webapp=1&sender_device=pc', '_blank')">TikTok</button>
+        <button onclick="window.open('https://www.tiktok.com/@gabiminecraft028', '_blank')">TikTok</button>
         <button onclick="window.open('https://snapchat.com/t/sS6oPOiV', '_blank')">Snapchat</button>
     </div>
-
 </div>
 
 <!-- Footer -->

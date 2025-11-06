@@ -5,18 +5,17 @@ from pathlib import Path
 def index(request):
     # Catégories et boutons
     buttons = {
-        "Website": {"Minecraft Modding Website": "https://minecraft-ps3-moding-website.onrender.com/"},
-        "Servers": {
-            "PS3 Backup Discord": "https://discord.gg/ex8Jgrm255",
-            "YouTube Server": "https://discord.gg/dZUEhNZWWD",
-            "Snapchat Chat": "https://snapchat.com/t/NuFx4joB",
-        },
-        "YT & TikTok": {
-            "YouTube": "https://www.youtube.com/@GabiMinecraft02ps3",
-            "TikTok": "https://www.tiktok.com/@gabiminecraft028",
-        },
-        "Backups": ["WantersV1", "BakaV1", "BakaV2", "LasV1"],
+    "Website": {"Minecraft Modding Website": "..."},
+    "Servers": {...},
+    "YT & TikTok": {...},
+    "Backups": {
+        "WantersV1": "/advancements/WantersV1",
+        "BakaV1": "/advancements/BakaV1",
+        "BakaV2": "/advancements/BakaV2",
+        "LasV1": "/advancements/LasV1",
     }
+}
+
     return render(request, 'main/index.html', {"buttons": buttons})
 
 def advancements(request, folder):
@@ -33,4 +32,4 @@ def advancements(request, folder):
         "folder": folder,
         "images": images,
         "texts": texts,
-    })
+})
