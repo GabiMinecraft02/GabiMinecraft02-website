@@ -3,130 +3,98 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GabiMinecraft02 Website</title>
     <link rel="stylesheet" href="{% static 'style.css' %}">
     <script>
-        // Fonction pour afficher/cacher les sous-boutons
+        // Fonction pour afficher/masquer les sous-menus
         function toggleSubmenu(id) {
-            const submenu = document.getElementById(id);
-            if(submenu.style.display === "flex") {
-                submenu.style.display = "none";
+            const menu = document.getElementById(id);
+            if (menu.style.display === 'flex') {
+                menu.style.display = 'none';
             } else {
-                submenu.style.display = "flex";
+                menu.style.display = 'flex';
             }
-        }
-
-        // Fonction pour afficher uniquement la section advancement quand on clique dessus
-        function showAdvancements(sectionId) {
-            const sections = document.querySelectorAll('.menu, .advancement-section');
-            sections.forEach(s => s.style.display = 'none'); // cache tout
-            document.getElementById(sectionId).style.display = 'block'; // affiche la section choisie
-        }
-
-        // Retour au menu principal
-        function backToMenu() {
-            const sections = document.querySelectorAll('.menu, .advancement-section');
-            sections.forEach(s => s.style.display = 'block');
-            const advSections = document.querySelectorAll('.advancement-section');
-            advSections.forEach(s => s.style.display = 'none');
         }
     </script>
 </head>
 <body>
-    <header>
-        Welcome to the GabiMinecraft02 Website!<br>
-        Go to my backups, servers, YouTube, Discord, Snapchat, TikTok, and my website.
-    </header>
+<!-- Header -->
+<header>
+    Welcome to the GabiMinecraft02 Website!<br>
+    Go to my backups, servers, YouTube, Discord, Snapchat, TikTok, and my Minecraft Modding Website
+</header>
 
-    <div class="menu">
+<!-- Menu principal -->
+<div class="menu">
 
-        <!-- Categorie Website -->
-        <div class="category">
-            <div class="category-title">Website</div>
-            <button onclick="window.open('https://minecraft-ps3-moding-website.onrender.com/', '_blank')">Minecraft Modding Website</button>
-        </div>
+    <!-- Website Category -->
+    <div class="category">
+        <div class="category-title">Website</div>
+        <button onclick="window.open('https://minecraft-ps3-moding-website.onrender.com/', '_blank')">
+            Minecraft Modding Website
+        </button>
+    </div>
 
-        <!-- Categorie Servers -->
-        <div class="category">
-            <div class="category-title">Servers</div>
-            <button onclick="window.open('https://discord.gg/ex8Jgrm255', '_blank')">PS3 Backup Discord</button>
-            <button onclick="window.open('https://discord.gg/dZUEhNZWWD', '_blank')">YouTube Server</button>
-            <button onclick="window.open('https://snapchat.com/t/NuFx4joB', '_blank')">Snapchat Chat</button>
-        </div>
+    <!-- Servers Category -->
+    <div class="category">
+        <div class="category-title">Servers</div>
+        <button onclick="window.open('https://discord.gg/ex8Jgrm255', '_blank')">PS3 Backup Discord</button>
+        <button onclick="window.open('https://discord.gg/dZUEhNZWWD', '_blank')">YouTube Server</button>
+        <button onclick="window.open('https://snapchat.com/t/NuFx4joB', '_blank')">Snapchat Chat</button>
+    </div>
 
-        <!-- Categorie YouTube & TikTok -->
-        <div class="category">
-            <div class="category-title">YouTube & TikTok</div>
-            <button onclick="window.open('https://www.youtube.com/@GabiMinecraft02ps3', '_blank')">YouTube</button>
-            <button onclick="window.open('https://www.tiktok.com/@gabiminecraft028?is_from_webapp=1&sender_device=pc', '_blank')">TikTok</button>
-        </div>
+    <!-- YouTube & TikTok Category -->
+    <div class="category">
+        <div class="category-title">YouTube & TikTok</div>
+        <button onclick="window.open('https://www.youtube.com/@GabiMinecraft02ps3', '_blank')">YouTube</button>
+        <button onclick="window.open('https://www.tiktok.com/@gabiminecraft028?is_from_webapp=1&sender_device=pc', '_blank')">TikTok</button>
+    </div>
 
-        <!-- Categorie Backups -->
-        <div class="category">
-            <div class="category-title">Backups</div>
-            <button onclick="showAdvancements('wantersV1-section')">Wanters V1</button>
-            <div id="wantersV1-submenu" class="submenu">
-                <button disabled>Download Archive (Coming Soon)</button>
-                <button disabled>Download Pkg (Coming Soon)</button>
-            </div>
-        </div>
-
-        <!-- Categorie Friends Backup -->
-        <div class="category">
-            <div class="category-title">Friends Backup</div>
-            <button onclick="showAdvancements('bakaV1-section')">Baka V1</button>
-            <div id="bakaV1-submenu" class="submenu">
-                <button disabled>Download Archive (Coming Soon)</button>
-                <button disabled>Download Pkg (Coming Soon)</button>
-            </div>
-
-            <button onclick="showAdvancements('bakaV2-section')">Baka V2</button>
-            <div id="bakaV2-submenu" class="submenu">
-                <button disabled>Download Archive (Coming Soon)</button>
-                <button disabled>Download Pkg (Coming Soon)</button>
-            </div>
-
-            <button onclick="showAdvancements('lasV1-section')">Las V1</button>
-            <div id="lasV1-submenu" class="submenu">
-                <button disabled>Download Archive (Coming Soon)</button>
-                <button disabled>Download Pkg (Coming Soon)</button>
-            </div>
+    <!-- Backups Category -->
+    <div class="category">
+        <div class="category-title">Backups</div>
+        <button onclick="toggleSubmenu('backups-sub')">Show Backups</button>
+        <div class="submenu" id="backups-sub">
+            <button onclick="window.open('/tools/advancements/WantersV1', '_blank')">Wanters V1</button>
+            <!-- Ajout futur: archive et pkg grisés -->
+            <button disabled>Download Archive (Coming Soon)</button>
+            <button disabled>Download PKG (Coming Soon)</button>
         </div>
     </div>
 
-    <!-- Advancement Sections -->
-    <div id="wantersV1-section" class="advancement-section" style="display:none; margin:30px;">
-        <button onclick="backToMenu()">← Back</button>
-        <h2>Wanters V1 Advancements</h2>
-        <p>Publiez vos photos et textes ici.</p>
-        <img src="{% static 'tools/advancements/WantersV1/example1.jpg' %}" alt="Example" width="400">
-        <img src="{% static 'tools/advancements/WantersV1/example2.jpg' %}" alt="Example" width="400">
+    <!-- Friends Backup Category -->
+    <div class="category">
+        <div class="category-title">Friends Backups</div>
+        <button onclick="toggleSubmenu('friends-sub')">Show Friends Backups</button>
+        <div class="submenu" id="friends-sub">
+            <button onclick="window.open('/tools/advancements/BakaV1', '_blank')">Baka V1</button>
+            <button disabled>Download Archive (Coming Soon)</button>
+            <button disabled>Download PKG (Coming Soon)</button>
+
+            <button onclick="window.open('/tools/advancements/BakaV2', '_blank')">Baka V2</button>
+            <button disabled>Download Archive (Coming Soon)</button>
+            <button disabled>Download PKG (Coming Soon)</button>
+
+            <button onclick="window.open('/tools/advancements/LasV1', '_blank')">Las V1</button>
+            <button disabled>Download Archive (Coming Soon)</button>
+            <button disabled>Download PKG (Coming Soon)</button>
+        </div>
     </div>
 
-    <div id="bakaV1-section" class="advancement-section" style="display:none; margin:30px;">
-        <button onclick="backToMenu()">← Back</button>
-        <h2>Baka V1 Advancements</h2>
-        <p>Publiez vos photos et textes ici.</p>
-        <img src="{% static 'tools/advancements/BakaV1/example1.jpg' %}" alt="Example" width="400">
+    <!-- Informations supplémentaires / footer mini menu -->
+    <div class="category">
+        <div class="category-title">Follow Me</div>
+        <button onclick="window.open('https://www.youtube.com/@GabiMinecraft02ps3', '_blank')">YouTube Channel</button>
+        <button onclick="window.open('https://www.tiktok.com/@gabiminecraft028?is_from_webapp=1&sender_device=pc', '_blank')">TikTok</button>
+        <button onclick="window.open('https://snapchat.com/t/sS6oPOiV', '_blank')">Snapchat</button>
     </div>
 
-    <div id="bakaV2-section" class="advancement-section" style="display:none; margin:30px;">
-        <button onclick="backToMenu()">← Back</button>
-        <h2>Baka V2 Advancements</h2>
-        <p>Publiez vos photos et textes ici.</p>
-        <img src="{% static 'tools/advancements/BakaV2/example1.jpg' %}" alt="Example" width="400">
-    </div>
+</div>
 
-    <div id="lasV1-section" class="advancement-section" style="display:none; margin:30px;">
-        <button onclick="backToMenu()">← Back</button>
-        <h2>Las V1 Advancements</h2>
-        <p>Publiez vos photos et textes ici.</p>
-        <img src="{% static 'tools/advancements/LasV1/example1.jpg' %}" alt="Example" width="400">
-    </div>
+<!-- Footer -->
+<footer>
+    © 2025 GabiMinecraft02 | All Rights Reserved
+</footer>
 
-    <footer>
-        &copy; 2025 GabiMinecraft02. All rights reserved.
-    </footer>
 </body>
 </html>
