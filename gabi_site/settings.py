@@ -5,7 +5,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = 'change_this_to_a_random_secret_key'
 DEBUG = True
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
+
+# ✅ Ajoute ton domaine Render ici
+ALLOWED_HOSTS = [
+    '127.0.0.1',
+    'localhost',
+    'gabiminecraft02-website.onrender.com',  # domaine Render
+]
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -64,5 +70,5 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [BASE_DIR / "static"]
 
-# Pour ton site principal : Advancements
+# Dossier de tes outils Minecraft
 TOOLS_DIR = BASE_DIR / "tools" / "advancements"
