@@ -1,4 +1,13 @@
-/* Base */
+/* 🌌 --- Base générale --- */
+:root {
+    --mc-green: #3C8D0D;
+    --mc-brown: #6B4423;
+    --mc-gold: #FFD700;
+    --mc-pink: #ff416c;
+    --mc-orange: #ff4b2b;
+}
+
+/* Fond */
 body {
     background-image: url('/static/Minecraft_background.jpg');
     background-size: cover;
@@ -9,46 +18,58 @@ body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 0;
     padding: 0;
-    text-shadow: 1px 1px 2px #000; /* améliore la lisibilité sur le fond */
+    text-shadow: 1px 1px 2px #000;
+    animation: fadeIn 1.2s ease both;
 }
 
-/* Header */
+/* --- Animation d'apparition --- */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(15px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* --- Header --- */
 header {
-    background: linear-gradient(90deg, #ff416c, #ff4b2b);
+    background: linear-gradient(90deg, var(--mc-pink), var(--mc-orange));
     padding: 25px;
     text-align: center;
-    font-size: 1.5rem;
+    font-size: 1.6rem;
     font-weight: bold;
     color: #fff;
     letter-spacing: 1px;
     text-shadow: 2px 2px 4px #000;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.5);
 }
 
-/* Menu container */
+/* --- Menu principal --- */
 .menu {
-    width: 350px;
-    margin: 30px auto;
-    padding: 10px;
-    background: rgba(0,0,0,0.5); /* léger fond sombre pour faire ressortir les boutons */
-    border-radius: 12px;
+    width: 360px;
+    margin: 40px auto;
+    padding: 25px;
+    background: rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(10px);
+    border-radius: 18px;
+    box-shadow: 0 0 25px rgba(0,0,0,0.5);
+    animation: fadeIn 1.3s ease both;
 }
 
-/* Categories */
+/* --- Catégories --- */
 .category {
     margin-bottom: 25px;
+    animation: fadeIn 0.9s ease both;
 }
 
 .category-title {
     font-weight: bold;
     font-size: 1.3rem;
     margin-bottom: 10px;
-    color: #ffcc00;
+    color: var(--mc-gold);
     text-shadow: 2px 2px 4px #000;
 }
 
-/* Buttons */
+/* --- Boutons principaux --- */
 .category button {
-    background: linear-gradient(90deg, #ff7e5f, #feb47b);
+    background: linear-gradient(90deg, var(--mc-green), var(--mc-brown));
     color: white;
     border: none;
     border-radius: 12px;
@@ -63,12 +84,17 @@ header {
 }
 
 .category button:hover {
-    background: linear-gradient(90deg, #6a11cb, #2575fc);
+    background: linear-gradient(90deg, #00c853, #a1887f);
     transform: scale(1.05);
-    box-shadow: 0 6px 15px rgba(0,0,0,0.5);
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.6);
 }
 
-/* Submenu */
+.category button:active {
+    transform: scale(0.97);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+}
+
+/* --- Sous-boutons (ex: backups, friends backup) --- */
 .submenu {
     display: none;
     flex-direction: column;
@@ -78,13 +104,14 @@ header {
 .submenu button {
     background: linear-gradient(90deg, #43cea2, #185a9d);
     font-size: 0.95rem;
+    border-radius: 10px;
 }
 
 .submenu button:hover {
     background: linear-gradient(90deg, #f7971e, #ffd200);
 }
 
-/* Disabled buttons */
+/* --- Boutons désactivés --- */
 button[disabled] {
     background: #555;
     color: #ccc;
@@ -92,14 +119,20 @@ button[disabled] {
     opacity: 0.7;
 }
 
-/* Footer */
+/* --- Footer --- */
 footer {
     text-align: center;
     padding: 15px;
-    background: linear-gradient(90deg, #ff416c, #ff4b2b);
+    background: linear-gradient(90deg, var(--mc-pink), var(--mc-orange));
     margin-top: 50px;
     font-size: 0.95rem;
     color: #fff;
     letter-spacing: 0.5px;
     text-shadow: 1px 1px 2px #000;
 }
+
+/* --- Curseur stylé (optionnel) --- */
+/* Mets une image pixel épée dans static/ et décommente la ligne ci-dessous */
+/* body {
+    cursor: url('/static/cursor_sword.png'), auto;
+} */
