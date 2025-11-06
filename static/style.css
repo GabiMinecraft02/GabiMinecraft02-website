@@ -1,13 +1,4 @@
-/* 🌌 --- Base générale --- */
-:root {
-    --mc-green: #3C8D0D;
-    --mc-brown: #6B4423;
-    --mc-gold: #FFD700;
-    --mc-pink: #ff416c;
-    --mc-orange: #ff4b2b;
-}
-
-/* Fond */
+/* ================= Base ================= */
 body {
     background-image: url('/static/Minecraft_background.jpg');
     background-size: cover;
@@ -18,19 +9,12 @@ body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 0;
     padding: 0;
-    text-shadow: 1px 1px 2px #000;
-    animation: fadeIn 1.2s ease both;
+    text-shadow: 1px 1px 2px #000; /* lisibilité */
 }
 
-/* --- Animation d'apparition --- */
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(15px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-/* --- Header --- */
+/* ================= Header ================= */
 header {
-    background: linear-gradient(90deg, var(--mc-pink), var(--mc-orange));
+    background: linear-gradient(90deg, #ff416c, #ff4b2b);
     padding: 25px;
     text-align: center;
     font-size: 1.6rem;
@@ -38,92 +22,96 @@ header {
     color: #fff;
     letter-spacing: 1px;
     text-shadow: 2px 2px 4px #000;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+    border-bottom: 2px solid rgba(255,255,255,0.2);
 }
 
-/* --- Menu principal --- */
+/* ================= Menu (Liquid Glass iOS 26) ================= */
 .menu {
     width: 360px;
-    margin: 40px auto;
+    margin: 30px auto;
     padding: 25px;
-    background: rgba(255, 255, 255, 0.12);
-    backdrop-filter: blur(10px);
-    border-radius: 18px;
-    box-shadow: 0 0 25px rgba(0,0,0,0.5);
-    animation: fadeIn 1.3s ease both;
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 20px;
+    box-shadow: 0 8px 32px rgba(31, 38, 135, 0.37);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    animation: fadeIn 0.8s ease-in-out;
+    transition: all 0.3s ease;
 }
 
-/* --- Catégories --- */
+.menu:hover {
+    transform: scale(1.02);
+    box-shadow: 0 12px 40px rgba(31, 38, 135, 0.5);
+}
+
+/* ================= Categories ================= */
 .category {
     margin-bottom: 25px;
-    animation: fadeIn 0.9s ease both;
 }
 
 .category-title {
     font-weight: bold;
-    font-size: 1.3rem;
+    font-size: 1.35rem;
     margin-bottom: 10px;
-    color: var(--mc-gold);
+    color: #ffcc00;
     text-shadow: 2px 2px 4px #000;
 }
 
-/* --- Boutons principaux --- */
+/* ================= Buttons ================= */
 .category button {
-    background: linear-gradient(90deg, var(--mc-green), var(--mc-brown));
+    background: linear-gradient(145deg, rgba(255,255,255,0.15), rgba(255,255,255,0.05));
     color: white;
     border: none;
-    border-radius: 12px;
+    border-radius: 14px;
     padding: 14px 22px;
-    margin-bottom: 8px;
+    margin-bottom: 10px;
     font-size: 1rem;
     cursor: pointer;
     text-align: left;
     width: 100%;
     transition: all 0.25s ease;
-    box-shadow: 0 3px 6px rgba(0,0,0,0.3);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    backdrop-filter: blur(6px);
 }
 
 .category button:hover {
-    background: linear-gradient(90deg, #00c853, #a1887f);
+    background: linear-gradient(145deg, rgba(255,255,255,0.25), rgba(255,255,255,0.05));
     transform: scale(1.05);
-    box-shadow: 0 0 20px rgba(255, 215, 0, 0.6);
+    box-shadow: 0 6px 25px rgba(0,0,0,0.35);
+    filter: brightness(1.15);
 }
 
-.category button:active {
-    transform: scale(0.97);
-    box-shadow: 0 2px 8px rgba(0,0,0,0.4);
-}
-
-/* --- Sous-boutons (ex: backups, friends backup) --- */
+/* ================= Submenu ================= */
 .submenu {
     display: none;
     flex-direction: column;
-    margin-left: 15px;
+    margin-left: 18px;
 }
 
 .submenu button {
-    background: linear-gradient(90deg, #43cea2, #185a9d);
+    background: linear-gradient(145deg, rgba(255,255,255,0.1), rgba(255,255,255,0.03));
     font-size: 0.95rem;
-    border-radius: 10px;
 }
 
 .submenu button:hover {
-    background: linear-gradient(90deg, #f7971e, #ffd200);
+    background: linear-gradient(145deg, rgba(255,255,255,0.25), rgba(255,255,255,0.05));
+    filter: brightness(1.2);
 }
 
-/* --- Boutons désactivés --- */
+/* ================= Disabled buttons ================= */
 button[disabled] {
-    background: #555;
+    background: rgba(0,0,0,0.3);
     color: #ccc;
     cursor: not-allowed;
-    opacity: 0.7;
+    opacity: 0.6;
 }
 
-/* --- Footer --- */
+/* ================= Footer ================= */
 footer {
     text-align: center;
     padding: 15px;
-    background: linear-gradient(90deg, var(--mc-pink), var(--mc-orange));
+    background: linear-gradient(90deg, #ff416c, #ff4b2b);
     margin-top: 50px;
     font-size: 0.95rem;
     color: #fff;
@@ -131,8 +119,8 @@ footer {
     text-shadow: 1px 1px 2px #000;
 }
 
-/* --- Curseur stylé (optionnel) --- */
-/* Mets une image pixel épée dans static/ et décommente la ligne ci-dessous */
-/* body {
-    cursor: url('/static/cursor_sword.png'), auto;
-} */
+/* ================= Animations ================= */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
