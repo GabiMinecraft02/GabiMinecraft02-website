@@ -1,0 +1,119 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ backup_title }}</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+<body>
+    <header>
+        {{ backup_title }}
+    </header>
+
+    <div class="advancement-container">
+        <button onclick="window.history.back()" class="back-btn">← Retour au menu</button>
+
+        <div class="advancement-content">
+            {% for item in images %}
+            <div class="advancement-item">
+                <img src="{% static item %}" alt="Image {{ forloop.counter }}" />
+            </div>
+            {% endfor %}
+
+            {% for text in texts %}
+            <div class="advancement-text">
+                <p>{{ text }}</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <footer>
+        &copy; 2025 GabiMinecraft02. All rights reserved.
+    </footer>
+
+    <style>
+        body {
+            background-image: url('{% static "Minecraft_background.jpg" %}');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            color: #fff;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            text-shadow: 1px 1px 2px #000;
+        }
+
+        header {
+            background: linear-gradient(90deg, #ff416c, #ff4b2b);
+            padding: 20px;
+            text-align: center;
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #fff;
+            text-shadow: 2px 2px 4px #000;
+        }
+
+        .advancement-container {
+            width: 90%;
+            max-width: 1000px;
+            margin: 30px auto;
+            background: rgba(0,0,0,0.6);
+            padding: 20px;
+            border-radius: 15px;
+        }
+
+        .back-btn {
+            background: linear-gradient(90deg, #ff7e5f, #feb47b);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            padding: 12px 20px;
+            font-size: 1rem;
+            cursor: pointer;
+            margin-bottom: 20px;
+            transition: all 0.25s ease;
+        }
+
+        .back-btn:hover {
+            background: linear-gradient(90deg, #6a11cb, #2575fc);
+            transform: scale(1.05);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.5);
+        }
+
+        .advancement-content {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .advancement-item img {
+            width: 100%;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+        }
+
+        .advancement-text p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            background: rgba(255,255,255,0.1);
+            padding: 12px;
+            border-radius: 10px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 15px;
+            background: linear-gradient(90deg, #ff416c, #ff4b2b);
+            margin-top: 50px;
+            font-size: 0.95rem;
+            color: #fff;
+            text-shadow: 1px 1px 2px #000;
+        }
+    </style>
+</body>
+</html>
