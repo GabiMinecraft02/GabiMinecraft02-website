@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.conf import settings
+from django.views.generic import TemplateView
 from pathlib import Path
 
 # ---------------------------
