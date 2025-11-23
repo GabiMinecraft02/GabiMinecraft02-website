@@ -38,7 +38,7 @@ ROOT_URLCONF = 'gabi_site.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'main' / 'templates'],
+        'DIRS': [BASE_DIR / 'main/templates'],  # tu peux ajouter d'autres chemins si besoin
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
